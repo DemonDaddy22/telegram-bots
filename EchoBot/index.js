@@ -7,27 +7,26 @@ Here are a few commands which I offer
 
 /start - Start the bot
 /help - command reference
-/echo - echo back the input message
+/echo <message> - echo back the input message
 `;
 
-const activityLogger = ctx => {
+bot.use((ctx, next) => {
     const date = new Date(ctx.message.date * 1000);
-    console.log(ctx.from.first_name + ' typed (' + ctx.message.text + ') at time: ' + date);
-}
+    if (ctx.updateSubTypes[0] === 'text') bot.telegram.sendMessage(process.env.CHAT_ID, ctx.from.first_name + ' typed (' + ctx.message.text + ') at time: ' + date);
+    else bot.telegram.sendMessage(process.env.CHAT_ID, ctx.from.first_name + ' sent ' + ctx.updateSubTypes[0] + ' at time: ' + date);
+    next();
+})
 
 bot.start(ctx => {
-    activityLogger(ctx);
     ctx.reply('Welcome to the Echo Bot, ' + ctx.from.first_name + '😃\n').catch(err => console.log(err));
     ctx.reply(helpMessage).catch(err => console.log(err));
 })
 
 bot.help(ctx => {
-    activityLogger(ctx);
     ctx.reply(helpMessage);
 })
 
 bot.command('echo', ctx => {
-    activityLogger(ctx);
     const input = ctx.message.text;
     const inputList = input.split(' ');
     
@@ -42,7 +41,6 @@ bot.command('echo', ctx => {
 })
 
 bot.on('message', ctx => {
-    activityLogger(ctx);
     ctx.reply(`Uh-oh! That went over my head! 😕`);
 })
 

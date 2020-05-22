@@ -31,6 +31,7 @@ bot.command('echo', ctx => {
     const inputList = input.split(' ');
     
     let message = '';
+    // inputList - ['/echo']
     if (inputList.length === 1) message = `I need some words to echo back 🌚`;
     else {
         inputList.shift();

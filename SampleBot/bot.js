@@ -10,6 +10,8 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx, next) => {
     const quote = `Your limitation—it's only your imagination.`;
     ctx.reply('Welcome ' + ctx.from.first_name + ', hope you are doing great!');
+    // alternately
+    // bot.telegram.sendMessage(ctx.chat.id, 'Welcome ' + ctx.from.first_name + ', hope you are doing great!', { parse_mode: 'Markdown' });
     ctx.state.quote = quote;
     next(ctx); // next will basically trigger the next possible middleware (in this case, use will be triggered)
 })

@@ -7,7 +7,9 @@ const helpMessage = `Please choose from the following options
 /start - start the bot
 /newyork - get an image of New York City
 /dubai - get a GIF of Dubai
+/singapore - get location of Singapore
 /cities - get photos of 2 different cities
+/citieslist - get Text file containing cities
 `;
 
 const getRandomCities = cities => {
@@ -45,6 +47,11 @@ bot.command('dubai', ctx => {
     bot.telegram.sendAnimation(ctx.chat.id, 'https://media2.giphy.com/media/c0BdI069vyn5K/giphy.gif?cid=790b7611640372d3186cd2341995cb37839375a907f0a08e&rid=giphy.gif', { reply_to_message_id: ctx.message.message_id });
 })
 
+bot.command('singapore', ctx => {
+    bot.telegram.sendChatAction(ctx.chat.id, 'find_location');
+    bot.telegram.sendLocation(ctx.chat.id, 1.3521, 103.8198 ); // latitude, longitude
+})
+
 bot.command('cities', ctx => {
     bot.telegram.sendChatAction(ctx.chat.id, 'upload_photo');
     const cities = ['res/dubai.jpg', 'res/hongkong.jpg', 'res/london.jpg', 'res/newyork.jpg', 'res/singapore.jpg'];
@@ -54,6 +61,11 @@ bot.command('cities', ctx => {
         media: { source: city }
     }));
     bot.telegram.sendMediaGroup(ctx.chat.id, result);
+})
+
+bot.command('citieslist', ctx => {
+    bot.telegram.sendChatAction(ctx.chat.id, 'upload_document');
+    bot.telegram.sendDocument(ctx.chat.id, { source: 'res/citieslist.txt' }, { thumb: { source: 'res/hongkong.jpg' } });
 })
 
 bot.launch();

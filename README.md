@@ -12,6 +12,8 @@ This repo contains bunch of Telegram Bots created using NodeJS and JavaScript. F
 
 1. EchoBot - a simple Telegram Bot which is used to send back the message typed by the user. The script also logs the events (with the timestamp) triggered by a user in a separate group chat.
 
+2. MediaBot - a simple Telegram Bot which is used to send media files like photos, document and GIF to user.
+
 ## Contributing
 
 To make contributions to this project, you can suggest improvements in documentation and code, and also help in getting rid of those stressful bugs. Update the README.md file with the changes you made so that your Pull Request would highlight them.

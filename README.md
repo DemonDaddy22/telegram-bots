@@ -14,6 +14,8 @@ This repo contains bunch of Telegram Bots created using NodeJS and JavaScript. F
 
 2. MediaBot - a simple Telegram Bot which is used to send media files like photos, document and GIF to user.
 
+3. APIBot - a simple Telegram Bot which makes use of *_Axios_* library to make *HTTP requests* and get response from various APIs. This bot helps you fetch a fortune cookie, a random picture of cat, a random picture of cat with input text written over it, list of dog breeds and a random picture of input dog breed.
+
 ## Contributing
 
 To make contributions to this project, you can suggest improvements in documentation and code, and also help in getting rid of those stressful bugs. Update the README.md file with the changes you made so that your Pull Request would highlight them.

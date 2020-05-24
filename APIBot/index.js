@@ -1,5 +1,6 @@
 const Telegraf = require('telegraf');
 const axios = require('axios');
+const fs = require('fs');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -10,6 +11,8 @@ const helpMessage = `Use the following commands
 /fortunecookie - get a random fortune cookie
 /cat - get a random cat image
 /cat <text> - get a random cat image with text written on it
+/dogbreeds - returns a list of dog breeds
+/dog <breed> - get a random image of input dog breed
 `;
 
 bot.start(ctx => {
@@ -55,6 +58,38 @@ bot.command('cat', async ctx => {
         } catch (err) {
             console.log(err);
         }
+    }
+})
+
+bot.command('dogbreeds', ctx => {
+    const rawData = fs.readFileSync('./dogBreeds.json', 'utf8');
+    const data = JSON.parse(rawData);
+
+    let message = `Here's a list of *Dog Breeds*:\n\n`;
+    data.forEach(dog => {
+        message += `\t-_${dog}_\n`;
+    })
+
+    ctx.reply(message, { parse_mode: 'MARKDOWN' });
+})
+
+bot.command('dog', ctx => {
+    const inputList = ctx.message.text.split(' ');
+    if (inputList.length !== 2) {
+        ctx.reply('Please enter a *dog breed*', { parse_mode: 'MARKDOWN' });
+        return;
+    }
+    const breedInput = inputList[1];
+    const rawData = fs.readFileSync('./dogBreeds.json', 'utf8');
+    const data = JSON.parse(rawData);
+
+    if (data.includes(breedInput)) {
+        axios.get(`https://dog.ceo/api/breed/${breedInput}/images/random`)
+            .then(res => {
+                bot.telegram.sendChatAction(ctx.chat.id, 'upload_photo');
+                bot.telegram.sendPhoto(ctx.chat.id, res.data.message, { reply_to_message_id: ctx.message.message_id });
+            })
+            .catch(err => console.log(err))
     }
 })
 

@@ -70,13 +70,13 @@ bot.command('dogbreeds', ctx => {
         message += `\t-_${dog}_\n`;
     })
 
-    ctx.reply(message, { parse_mode: 'MARKDOWN' });
+    ctx.reply(message, { parse_mode: 'markdown' });
 })
 
 bot.command('dog', ctx => {
     const inputList = ctx.message.text.split(' ');
     if (inputList.length !== 2) {
-        ctx.reply('Please enter a *dog breed*', { parse_mode: 'MARKDOWN' });
+        ctx.reply('Please enter a *dog breed*', { parse_mode: 'markdown' });
         return;
     }
     const breedInput = inputList[1];
@@ -90,6 +90,17 @@ bot.command('dog', ctx => {
                 bot.telegram.sendPhoto(ctx.chat.id, res.data.message, { reply_to_message_id: ctx.message.message_id });
             })
             .catch(err => console.log(err))
+    } else {
+        const suggestions = data.filter(item => item.startsWith(breedInput));
+
+        let message = `Did you mean?\n\n`;
+        suggestions.forEach(dog => {
+            message += `\t-_${dog}_\n`;
+        })
+
+        if (suggestions.length === 0) message = `Sorry! Couldn't find that breed 🙁`;
+
+        ctx.reply(message, { parse_mode: 'markdown' });
     }
 })
 

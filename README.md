@@ -14,9 +14,11 @@ This repo contains bunch of Telegram Bots created using NodeJS and JavaScript. F
 
 2. MediaBot - a simple Telegram Bot which is used to send media files like photos, document and GIF to user.
 
-3. APIBot - a simple Telegram Bot which makes use of *_Axios_* library to make *HTTP requests* and get response from various APIs. This bot helps you fetch a fortune cookie, a random picture of cat, a random picture of cat with input text written over it, list of dog breeds and a random picture of input dog breed.
+3. APIBot - a simple Telegram Bot which makes use of **_Axios_** library to make **HTTP requests** and get response from various APIs. This bot helps you fetch a fortune cookie, a random picture of cat, a random picture of cat with input text written over it, list of dog breeds and a random picture of input dog breed.
 
-4. FactsBot - a simple Telegram Bot which makes use of *_Axios_* library to make *HTTP requests* and get response from Google Sheet where certain number of facts are stored. A random fact (from the response dataset) is rendered upon user's request. Also, an option to update the bot is provided, which needs to be triggered whenever changes are made to Google Sheet.
+4. FactsBot - a simple Telegram Bot which makes use of **_Axios_** library to make **HTTP requests** and get response from Google Sheet where certain number of facts are stored. A random fact (from the response dataset) is rendered upon user's request. Also, an option to update the bot is provided, which needs to be triggered whenever changes are made to Google Sheet.
+
+5. CryptoBot - a simple Telegram Bot which makes use of **_Axios_** library to make **HTTP requests** and get response from CryptoCompare regarding various crypto currencies.
 
 ## Contributing
 
